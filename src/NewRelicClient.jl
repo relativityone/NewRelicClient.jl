@@ -1,5 +1,6 @@
 module NewRelicClient
 
-# Write your package code here.
+using HTTP
+include("client.jl")
 
 end
