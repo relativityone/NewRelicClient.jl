@@ -15,3 +15,5 @@ mutable struct Client
         return new(apikey, accountid, "https://api.newrelic.com/graphql", 60)
     end
 end
+
+
