@@ -3,7 +3,7 @@
 """
     stringtojson3array(jsonstring::String)
 
-Take the given string and return a JSON3.Array object
+Take the given string and return an AbstractArray object
 
 # Argument
 - `jsonstring::String`: The JSON returned by New Relic NerdGraph API
@@ -14,15 +14,11 @@ function stringtojson3array(jsonstring::String)
     if isa(jsonresults, JSON3.Array)
         return jsonresults
     else if isa(jsonresults, JSON3.Object)
-        resultsreturn = JSON3.Array
-        push!(resultsreturn, jsonresults)
-        return resultsreturn
+        return [jsonresults]
     else
         throw(TypeError)
     end
 end
-
-
 
 """
     jsonarraytodataframe(jsonarray::JSON3.Array)
@@ -30,9 +26,9 @@ end
 Take the given string containing JSON and parse it into a flattened dataframe
 
 # Argument
-- `jsonarray::JSON3.Array`: The JSON3.Array that is supposed to be turned into a DataFrame
+- `jsonarray::JSON3.Array`: The AbstractArray that is supposed to be turned into a DataFrame
 """
-function jsonstringtodataframe(jsonarray::JSON3.Array)
+function jsonstringtodataframe(jsonarray::AbstractArray)
 
     for key in keys(jsonarray[1])
         println(key)
