@@ -6,5 +6,6 @@ using JSON3
 
 include("client.jl")
 include("utils.jl")
+include("parser.jl")
 
 end
