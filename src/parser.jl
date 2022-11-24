@@ -10,10 +10,18 @@ Take the given string and return an AbstractArray object
 """
 function stringtojson3array(jsonstring::String)
     jsonparsed = JSON3.read(jsonstring)
-    jsonresults = jsonparsed["data"]["actor"]["account"]["nrql"]["results"]
+    try
+        jsonresults = jsonparsed["data"]["actor"]["account"]["nrql"]["results"]
+    catch e
+        if isa(e, KeyError)
+            println("This is not a New Relic Formatted String.")
+            return e 
+        end
+    end
+
     if isa(jsonresults, JSON3.Array)
         return jsonresults
-    else if isa(jsonresults, JSON3.Object)
+    elseif isa(jsonresults, JSON3.Object)
         return [jsonresults]
     else
         throw(TypeError)
@@ -29,9 +37,8 @@ Take the given string containing JSON and parse it into a flattened dataframe
 - `jsonarray::JSON3.Array`: The AbstractArray that is supposed to be turned into a DataFrame
 """
 function jsonstringtodataframe(jsonarray::AbstractArray)
+    dictkeys = finddictkeys(jsonarray[1])
+    
 
-    for key in keys(jsonarray[1])
-        println(key)
-    end
     return
 end
