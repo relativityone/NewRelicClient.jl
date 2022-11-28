@@ -2,5 +2,6 @@ using NewRelicClient
 using Test
 
 @testset "NewRelicClient.jl" begin
-    # Write your tests here.
+    @test finddictkeys([Dict("x"=>Dict("y"=>1))]) == Set(["x"])
+    @test finddictkeys([Dict("x"=>1)]) == nothing
 end
