@@ -37,7 +37,7 @@ function runquery(client::Client, query::String)
                     }"
     myjson = Dict("query"=>querygraqhql)
     my_headers = HTTP.mkheaders(["Content-Type" => "application/json" ,"API-Key" => client.apikey])
-    r = HTTP.post(client.newrelicurl,my_headers,JSON.json(myjson))
+    r = HTTP.post(client.newrelicurl,my_headers,JSON3.write(myjson))
     results = String(r.body)
     resultsjsonobject = stringtojson3array(results)
     resultsdataframe = arraytodataframe(resultsjsonobject)
