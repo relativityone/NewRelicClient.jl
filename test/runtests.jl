@@ -6,3 +6,7 @@ using Test
     @test NewRelicClient.finddictkeys([Dict("x"=>1)]) == nothing
     @test issetequal(NewRelicClient.getuniquekeys([Dict("x"=>1)]), Set([keys(Dict("x"=>1))]))
 end
+
+@testset "parser.jl" begin 
+    @test NewRelicClient.arraytodataframe([Dict("A"=>1)]) == DataFrame(A=Int64[1])
+end
