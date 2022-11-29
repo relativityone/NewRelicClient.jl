@@ -1,5 +1,3 @@
-
-
 """
     stringtojson3array(jsonstring::String)
 
