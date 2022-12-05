@@ -29,7 +29,7 @@ function runquery(client::Client, query::String)
     querygraqhql = "{
                        actor {
                          account(id: $(client.accountid)) {
-                                nrql(query: \"$(query)\") {
+                                nrql(query: \"$(query)\", timeout: $(client.timeout)) {
                             results
                                 }
                             }
