@@ -42,7 +42,7 @@ function runquery(client::Client, query::String)
     resultsjsonobject = stringtojson3array(results)
     resultsdataframe = arraytodataframe(resultsjsonobject)
     resultsdataframe = processdatatypes(resultsdataframe)
-    if contains("facet", query)
+    if contains("facet", lowercase(query))
         resultsdataframe = extractfacets(resultsdataframe)
     end
     return resultsdataframe
