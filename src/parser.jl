@@ -66,7 +66,7 @@ This processes the columns and parses them into types that are more reflective o
 function processdatatypes(nrdataframe::DataFrame)
     for n in names(nrdataframe)
         if n == "endTimeSeconds" || n == "beginTimeSeconds"
-            nrdataframe[!, n] = unix2datetime.(nrdataframe[:,n])
+            nrdataframe[!, n] = Dates.unix2datetime.(nrdataframe[:,n])
         elseif isa(nrdataframe[!, n], Vector{Union{Missing, String}}) || isa(nrdataframe[!, n], Float64) || isa(nrdataframe[!, n], Int)
             resultsstore = []
             for row in eachrow(nrdataframe)
