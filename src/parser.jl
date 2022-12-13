@@ -104,7 +104,7 @@ This processes the columns and extracts the facet data into their own columns
 """
 function extractfacets!(nrdataframe::DataFrame, query::String)
     facets = getfacetnames(query)
-    for facet in facets
+    for (facet, test) in zip(facets, nrdataframe[1, "facet"])
         nrdataframe[:, facet] .= ""
     end
     for row in eachrow(nrdataframe)
