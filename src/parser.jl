@@ -102,7 +102,7 @@ This processes the columns and extracts the facet data into their own columns
 - `nrdataframe::DataFrame`: This is the results data frame from a NR query
 - `query::String`: This is the query string which we need to extract the facet information
 """
-function extractfacets(nrdataframe::DataFrame, query::String)
+function extractfacets!(nrdataframe::DataFrame, query::String)
     facets = getfacetnames(query)
     for facet in facets
         nrdataframe[:, facet] .= ""
@@ -113,5 +113,4 @@ function extractfacets(nrdataframe::DataFrame, query::String)
             row[key] = value
         end
     end
-    return nrdataframe
 end
