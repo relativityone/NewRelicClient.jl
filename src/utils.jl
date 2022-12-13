@@ -22,3 +22,17 @@ function getuniquekeys(jsonarray::AbstractArray)
     end
     return uniquekeys
 end
+
+function getfacetnames(query::String)
+    facets = []
+    startkeeping = false
+    for token in split(query)
+        if startkeeping
+            push!(facets, replace(token, ","=>""))
+        end
+        if lowercase(token) == "facet"
+            startkeeping = true
+        end
+    end
+    return facets
+end

@@ -42,5 +42,8 @@ function runquery(client::Client, query::String)
     resultsjsonobject = stringtojson3array(results)
     resultsdataframe = arraytodataframe(resultsjsonobject)
     resultsdataframe = processdatatypes(resultsdataframe)
+    if contains("facet", query)
+        resultsdataframe = extractfacets(resultsdataframe)
+    end
     return resultsdataframe
 end

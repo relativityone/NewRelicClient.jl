@@ -92,3 +92,26 @@ function processdatatypes(nrdataframe::DataFrame)
     end
     return nrdataframe
 end
+
+"""
+    extractfacets(nrdataframe::DataFrame, query::String)
+
+This processes the columns and extracts the facet data into their own columns
+
+# Argument
+- `nrdataframe::DataFrame`: This is the results data frame from a NR query
+- `query::String`: This is the query string which we need to extract the facet information
+"""
+function extractfacets(nrdataframe::DataFrame, query::String)
+    facets = getfacetnames(query)
+    for facet in facets
+        nrdataframe[:, facet] .= ""
+    end
+    for row in eachrow(nrdataframe)
+        facetvalues = row["facet"]
+        for (key, value) in zip(facets, facetvalues)
+            row[key] = value
+        end
+    end
+    return nrdataframe
+end
