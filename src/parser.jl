@@ -113,4 +113,5 @@ function extractfacets!(nrdataframe::DataFrame, query::String)
             row[key] = value
         end
     end
+    select!(nrdataframe, Not([:facet]))
 end
