@@ -104,7 +104,7 @@ This processes the columns and extracts the facet data into their own columns
 """
 function extractfacets!(nrdataframe::DataFrame, query::String)
     facets = getfacetnames(query)
-    if nrdataframe[1, "facet"] isa JSON3.Array
+    if hasproperty(nrdataframe, "facet") && nrdataframe[1, "facet"] isa JSON3.Array
         for (facet, test) in zip(facets, nrdataframe[1, "facet"])
             nrdataframe[:, facet] .= ""
         end
